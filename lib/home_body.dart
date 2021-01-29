@@ -36,7 +36,7 @@ class HomeBody extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: changeTheme.flag ? Icon(Icons.wb_sunny) : Icon(Icons.nightlight_round),
+            icon: changeTheme.flag ? Icon(Icons.wb_sunny,color: Colors.redAccent,) : Icon(Icons.nightlight_round,color: Colors.yellow,),
             onPressed: () => changeTheme.flag ? changeTheme.increment() : changeTheme.increment(),
           )
         ],
@@ -64,7 +64,7 @@ class HomeBody extends StatelessWidget {
             ),
             RaisedButton(
               color: Theme.of(context).accentColor,
-              child: Text('Reset'),
+              child: Text('Reset',style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color),),
               onPressed: () => count.reset.add(null),
             )
           ],
