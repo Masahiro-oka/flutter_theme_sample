@@ -30,5 +30,6 @@ class CountProvider {
   void dispose(){
     _onTapController.close();
     _countController.close();
+    _resetController.close();
   }
 }
