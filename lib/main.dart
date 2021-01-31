@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterthemesample/my_home_page.dart';
 import 'package:flutterthemesample/provider/count_provider.dart';
+import 'package:flutterthemesample/provider/count_value_notifier.dart';
 import 'package:flutterthemesample/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ void main() {
           ),
           ChangeNotifierProvider(
             create: (context) => ThemeProvider(),
-          )
+          ),
         ],
         child: MyApp())
   );

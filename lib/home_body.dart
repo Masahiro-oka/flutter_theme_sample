@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterthemesample/provider/count_provider.dart';
+//import 'package:flutterthemesample/provider/count_provider.dart';
+import 'package:flutterthemesample/provider/count_value_notifier.dart';
 import 'package:flutterthemesample/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +11,11 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final changeTheme = Provider.of<ThemeProvider>(context);
-    final count = Provider.of<CountProvider>(context);
+//    final count = Provider.of<CountProvider>(context);
+    final countValue = CountNotifier();
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -52,27 +56,43 @@ class HomeBody extends StatelessWidget {
                 color: Theme.of(context).textTheme.bodyText2.color
               ),
             ),
-            StreamBuilder(
-                stream: count.count,
-                initialData: 0,
-                builder: (context, snapshot) {
-                  return Text(
-                    '${snapshot.data}',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  );
-                }
+            ValueListenableBuilder<int>(
+              valueListenable: countValue,
+              builder: (context, value, child) => Text('${countValue.count}',
+              style: Theme.of(context).textTheme.bodyText1,),
             ),
-            RaisedButton(
-              color: Theme.of(context).accentColor,
-              child: Text('Reset',style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color),),
-              onPressed: () => count.reset.add(null),
+//            ValueListenableProvider.value(
+//              value: countValue,
+//              child: Text(countValue.value.toString(),
+//                style: Theme.of(context).textTheme.bodyText1,),
+//              builder: (context, child) => Text('${countValue.value.toString()}',
+//                style: Theme.of(context).textTheme.bodyText1,),
+//            ),
+//            StreamBuilder(
+//                stream: count.count,
+//                initialData: 0,
+//                builder: (context, snapshot) {
+//                  return Text(
+//                    '${snapshot.data}',
+//                    style: Theme.of(context).textTheme.bodyText1,
+//                  );
+//                }
+//            ),
+            ValueListenableBuilder(
+              valueListenable: countValue,
+              builder: (context, value, child) => RaisedButton(
+                color: Theme.of(context).accentColor,
+                child: Text('Reset',style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color),),
+                onPressed: () => countValue.reset(),
+              ),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,
-        onPressed: () => count.increment.add(null),
+        onPressed: () => countValue.increment(),
+//            count.increment.add(null),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
