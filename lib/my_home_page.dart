@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterthemesample/home_body.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({@required this.title});
+  const MyHomePage({@required this.title});
   final String title;
 
   @override

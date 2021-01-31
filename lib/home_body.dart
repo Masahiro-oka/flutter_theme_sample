@@ -5,7 +5,7 @@ import 'package:flutterthemesample/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeBody extends StatelessWidget {
-  HomeBody({@required this.title});
+  const HomeBody({@required this.title});
 
   final String title;
 
@@ -50,11 +50,11 @@ class HomeBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'You have pushed the button this many times:',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText2.color
-              ),
+//              style: TextStyle(
+//                color: Theme.of(context).textTheme.bodyText2.color
+//              ),
             ),
             ValueListenableBuilder<int>(
               valueListenable: countValue,
@@ -78,22 +78,34 @@ class HomeBody extends StatelessWidget {
 //                  );
 //                }
 //            ),
-            ValueListenableBuilder(
-              valueListenable: countValue,
-              builder: (context, value, child) => RaisedButton(
+              RaisedButton(
                 color: Theme.of(context).accentColor,
-                child: Text('Reset',style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color),),
-                onPressed: () => countValue.reset(),
+                child: const Text('Reset'),
+                onPressed: () => countValue.increment(false),
               ),
-            )
+//            Align(
+//              alignment: Alignment.bottomRight,
+//              child: GestureDetector(
+//                onTap: () =>countValue.increment(),
+//                child: Container(
+//                  width: 56,
+//                  height: 56,
+//                  margin: EdgeInsets.all(16),
+//                  decoration: BoxDecoration(
+//                    color: Theme.of(context).accentColor,
+//                    shape: BoxShape.circle,
+//                  ),
+//                  child: Icon(Icons.add, color: Colors.white),
+//                ),
+//              ),
+//            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,
-        onPressed: () => countValue.increment(),
+        onPressed: () => countValue.increment(true),
 //            count.increment.add(null),
-        tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
     );

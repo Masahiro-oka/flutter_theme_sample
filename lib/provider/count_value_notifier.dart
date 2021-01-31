@@ -5,16 +5,16 @@ class CountNotifier extends ValueNotifier<int> {
 
   int count = 0;
 
-  void increment(){
-    print('on tap plus');
-    count++;
-    notifyListeners();
-  }
-
-  void reset(){
-    print('on tap reset');
-    count = 0;
-    notifyListeners();
+  void increment(bool flag){
+    if(flag){
+      print('on tap plus');
+      count++;
+      notifyListeners();
+    } else {
+      print('on tap reset');
+      count = 0;
+      notifyListeners();
+    }
   }
 
 }
